@@ -19,6 +19,10 @@
         </select>
         <button id="searchButton" v-on:click="get(searchHeader)" v-if="!firstSearchDone">Search</button>
       </div>
+      <div id="loading-container" v-if="info===null && firstSearchDone">
+        <img v-bind:src="'https://media2.giphy.com/media/PUYgk3wpNk0WA/giphy.gif?cid=790b761107d64830af64458f375a1b97726c8ad2e59f358e&rid=giphy.gif'" alt="loader-gif" class="loader">
+        
+      </div>
       
       <!-- <div class="info-children" v-for="(value, index) in info" v-bind:key="index">
         <h1>Search Criteria:{{searchHeader}}</h1>
@@ -80,6 +84,7 @@ export default {
         info: null,
         index: 9,
         firstSearchDone: false,
+        isLoading: false,
 
         starwarsCriteria: [
           {people:['item.name','item.birth_year','item.height','item.gender','item.hair_color']},
@@ -97,15 +102,12 @@ export default {
 
     methods:{
       get(searchHeader){
-        this.info=null
-        // console.log('get')
-        //var name = 'x'
+        this.info = null
         axios
-        //.get('https://api.coindesk.com/v1/bpi/currentprice.json')
         .get('https://swapi.co/api/'+searchHeader+'/')
         .then(response => (this.info = response))
-        //.then(response => (console.log(response)))
         this.firstSearchDone = true
+        
       },
 
       
@@ -118,10 +120,12 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
 html,body{
   width: 100%;
   box-sizing: border-box;
+  /* background: #f4f4f3; */
+  margin: 0 auto;
 
 }
 
@@ -150,7 +154,8 @@ span{
 }
 
 .logo{
-  max-width: 400px;
+  max-width: 200px;
+  width: 50%
 }
 
 /* .info-container{
@@ -237,6 +242,17 @@ button{
 
 button:hover{
   border: 5px solid #ffc106;
+
+}
+
+.loader{
+  max-width: 100px;
+}
+
+@media only screen and (max-width: 600px) {
+  .info-container{
+    margin: 3%;
+  }
 
 }
 
