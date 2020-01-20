@@ -8,33 +8,32 @@
       <p>What Star Wars category would you like to search?</p>
       <div id="search-container">
         
-        <!-- <input type="text" @focus="updateCriteria()" v-model="searchHeader"> -->
         <select v-model="searchHeader" @change="get(searchHeader)">
           <option>people</option>
-          <!-- <option>films</option> -->
           <option>starships</option>
           <option>vehicles</option>
           <option>species</option>
           <option>planets</option>
         </select>
+        <select v-model="page" @change="get(searchHeader)">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+        </select>
+
         <button id="searchButton" v-on:click="get(searchHeader)" v-if="!firstSearchDone">Search</button>
+      
       </div>
       <div id="loading-container" v-if="info===null && firstSearchDone">
         <img v-bind:src="'https://media2.giphy.com/media/PUYgk3wpNk0WA/giphy.gif?cid=790b761107d64830af64458f375a1b97726c8ad2e59f358e&rid=giphy.gif'" alt="loader-gif" class="loader">
         
       </div>
-      
-      <!-- <div class="info-children" v-for="(value, index) in info" v-bind:key="index">
-        <h1>Search Criteria:{{searchHeader}}</h1>
-        <p>{{index}}:</p>
-        <p>{{value}}</p>
-      </div> -->
       <h1 v-if="info !==null"><u>List <span class="lower">of</span> {{searchHeader}}</u></h1>
       <div class="test-container" v-if="info !== null">
-        
 
+        <!-- info card -->
         <div class="info-container" v-for="(item,index) in info.data.results" v-bind:key="index">
-          
           <!-- people -->
           <h3>{{item.name}}</h3>
           <p v-if="searchHeader==='people'">Birth Year: {{item.birth_year}}.</p>
@@ -85,6 +84,7 @@ export default {
         index: 9,
         firstSearchDone: false,
         isLoading: false,
+        page:1,
 
         starwarsCriteria: [
           {people:['item.name','item.birth_year','item.height','item.gender','item.hair_color']},
@@ -104,7 +104,7 @@ export default {
       get(searchHeader){
         this.info = null
         axios
-        .get('https://swapi.co/api/'+searchHeader+'/')
+        .get('https://swapi.co/api/'+searchHeader+'/?page='+this.page)
         .then(response => (this.info = response))
         this.firstSearchDone = true
         
@@ -142,10 +142,14 @@ span{
   display: flex;
   justify-content: center;
   align-items: center; 
-  flex-direction: column; 
+  flex-direction: row; 
   margin-top: 0%;
   margin-bottom: 5%;
 }
+
+#search-container select, button{
+  margin: 1%;
+  }
 
 #sw-logo-container{
   width: 100%;
@@ -224,10 +228,10 @@ select{
   height: 40px;
 }
 
-button{
+button#searchButton{
   width: 140px;
   height: 40px;
-  margin-top: 1%;
+  
   background-color: #ffc1066b;
   color: black;
   border: none;
@@ -240,7 +244,7 @@ button{
   outline: none;
 }
 
-button:hover{
+button#searchButton:hover{
   border: 5px solid #ffc106;
 
 }
