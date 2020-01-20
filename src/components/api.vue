@@ -9,7 +9,7 @@
       <div id="search-container">
         
         <!-- <input type="text" @focus="updateCriteria()" v-model="searchHeader"> -->
-        <select v-model="searchHeader">
+        <select v-model="searchHeader" @change="get(searchHeader)">
           <option>people</option>
           <!-- <option>films</option> -->
           <option>starships</option>
@@ -17,7 +17,7 @@
           <option>species</option>
           <option>planets</option>
         </select>
-        <button id="searchButton" v-on:click="get(searchHeader)">Search</button>
+        <button id="searchButton" v-on:click="get(searchHeader)" v-if="!firstSearchDone">Search</button>
       </div>
       
       <!-- <div class="info-children" v-for="(value, index) in info" v-bind:key="index">
@@ -79,6 +79,7 @@ export default {
         title: 'test',
         info: null,
         index: 9,
+        firstSearchDone: false,
 
         starwarsCriteria: [
           {people:['item.name','item.birth_year','item.height','item.gender','item.hair_color']},
@@ -96,6 +97,7 @@ export default {
 
     methods:{
       get(searchHeader){
+        this.info=null
         // console.log('get')
         //var name = 'x'
         axios
@@ -103,10 +105,10 @@ export default {
         .get('https://swapi.co/api/'+searchHeader+'/')
         .then(response => (this.info = response))
         //.then(response => (console.log(response)))
-
-
-        
+        this.firstSearchDone = true
       },
+
+      
 
       
     }
