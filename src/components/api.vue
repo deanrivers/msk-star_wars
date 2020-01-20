@@ -140,6 +140,7 @@ span{
   align-items: center; 
   flex-direction: column; 
   margin-top: 0%;
+  margin-bottom: 5%;
 }
 
 #sw-logo-container{
@@ -194,6 +195,8 @@ span{
   margin-bottom: 2%;
   
   margin: 1%;
+  padding: 1%;
+  border: 0px solid #ffc106;
 
 
 }
@@ -201,9 +204,10 @@ span{
 .info-container:hover{
   box-shadow: 0 10px 20px rgba(0,0,0,0.15);
   position: relative;
-  bottom: 8px;
+  bottom: 5px;
   border: none;
   background: #ffc1066b;
+  /* border: 2px solid #ffc106; */
   /* border: 1px solid #84DBFD; */
 } 
 
