@@ -124,7 +124,7 @@ export default {
 html,body{
   width: 100%;
   box-sizing: border-box;
-  /* background: #f4f4f3; */
+  background: #f4f4f3;
   margin: 0 auto;
 
 }
