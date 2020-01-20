@@ -33,10 +33,10 @@
           
           <!-- people -->
           <h3>{{item.name}}</h3>
-          <p v-if="searchHeader==='people'">Birth Year: {{item.birth_year}}</p>
-          <p v-if="searchHeader==='people'">Height: {{item.height}}</p>
-          <p v-if="searchHeader==='people'">Gender: {{item.gender}}</p>
-          <p v-if="searchHeader==='people'">Hair color: {{item.hair_color}}</p>
+          <p v-if="searchHeader==='people'">Birth Year: {{item.birth_year}}.</p>
+          <p v-if="searchHeader==='people'">Height: {{item.height}} cm.</p>
+          <p v-if="searchHeader==='people'">Gender: {{item.gender}}.</p>
+          <p v-if="searchHeader==='people'">Hair color: {{item.hair_color}}.</p>
           
           <!-- starship --> 
           <p v-if="searchHeader==='starships'">Model: {{item.model}}.</p>
@@ -46,8 +46,10 @@
           <p v-if="searchHeader==='starships'">Cargo capacity: {{item.cargo_capacity}}.</p>
 
           <!-- vehicles -->
+          <p v-if="searchHeader==='vehicles'">Model: {{item.model}}.</p>
           <p v-if="searchHeader==='vehicles'">Max speed: {{item.max_atmosphering_speed}}.</p>
           <p v-if="searchHeader==='vehicles'">Max Passengers: {{item.passengers}}.</p>
+          <p v-if="searchHeader==='vehicles'">Crew size: {{item.crew}}.</p>
 
           <!-- species -->
           <p v-if="searchHeader==='species'">Classification: {{item.classification}}.</p>
@@ -58,7 +60,7 @@
           <!-- planets -->
           <p v-if="searchHeader==='planets'">Terrain: {{item.terrain}}.</p>
           <p v-if="searchHeader==='planets'">Population: {{item.population}}.</p>
-          <p v-if="searchHeader==='planets'">Gravity: {{item.gravity}}</p>
+          <p v-if="searchHeader==='planets'">Gravity: {{item.gravity}}.</p>
 
         </div>
       </div>
@@ -77,13 +79,11 @@ export default {
         title: 'test',
         info: null,
         index: 9,
-        // starwarsCriteria:[
-        //   {people: ['item.name','item.birth_year','item.height','item.gender','item.hair_color']}
-        //   ],
+
         starwarsCriteria: [
           {people:['item.name','item.birth_year','item.height','item.gender','item.hair_color']},
         ],
-        searchHeader: '',
+        searchHeader: 'people',
         images:{
           credit: 'https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
         }
@@ -135,7 +135,8 @@ span{
 #search-container{
   display: flex;
   justify-content: center;
-  align-items: center;  
+  align-items: center; 
+  flex-direction: column; 
   margin-top: 0%;
 }
 
@@ -208,6 +209,29 @@ select{
   background-color: #ffc1066b;
   color: black;
   border: none;
+  width: 80px;
+  height: 40px;
+}
+
+button{
+  width: 140px;
+  height: 40px;
+  margin-top: 1%;
+  background-color: #ffc1066b;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  border: 0px solid #ffc106;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+  background: black;
+  color: white;
+  outline: none;
+}
+
+button:hover{
+  border: 5px solid #ffc106;
+
 }
 
 
