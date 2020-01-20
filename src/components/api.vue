@@ -7,7 +7,7 @@
 
       <p>What Star Wars category would you like to search?</p>
       <div id="search-container">
-        <span>category</span>
+        <span>category -></span>
         <select v-model="searchHeader" @change="get(searchHeader)">
           <option>people</option>
           <option>starships</option>
@@ -15,7 +15,7 @@
           <option>species</option>
           <option>planets</option>
         </select>
-        <span>page</span>
+        <span>page -></span>
         <select v-model="page" @change="get(searchHeader)">
           <option>1</option>
           <option>2</option>
